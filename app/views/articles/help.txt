@@ -1,0 +1,104 @@
+show.html.erb
+
+# <h1>Articles</h1>
+
+# <ul>
+#     <% @artcles.each do |article| %>
+#         <li>
+#             <a href="/articles/<%= article.id %>">
+#                 <%= article.title %>
+#             </a>
+#         </li>
+#     <% end %>
+# </ul>
+
+
+# <h2>Comments</h2>
+# <% @article.comments.each do |comment| %>
+#     <p>
+#         <strong>Commenter:</strong>
+#         <%= comment.commenter %>
+#     </p>
+
+#     <p>
+#         <strong>Comment:</strong>
+#         <%= comment.body %>
+#     </p>
+# <% end %>
+
+# <h2>Add a comment:</h2>
+# <%= form_with model: [ @article, @article.comments.build ] do |form| %>
+#     <p>
+#         <%= form.label :commenter %><br>
+#         <%= form.text_field :commenter %>
+#     </p>
+#     <p>
+#         <%= form.label :body %><br>
+#         <%= form.text_area :body %>
+#     </p>
+#     <p>
+#         <%= form.submit %>
+#     </p>
+# <% end %>
+
+
+
+
+
+__________________________________________________
+
+
+index.html.erb
+
+# <h1>Hello, Rails!</h1>
+# <h1>Articles#index</h1>
+# <p>Find me in app/views/articles/index.html.erb</p>
+
+
+            # <a href="<%= article_path(article) %>">
+            #     <%= article.title %>
+            # </a>
+
+__________________________________________________
+
+
+
+new.html.erb
+
+# <%= form_with model: @article do |form| %>
+#   <div>
+#     <%= form.label :title %><br>
+#     <%= form.text_field :title %>
+#     <% @article.errors.full_messages_for(:title).each do |message| %>
+#       <div><%= message %></div>
+#     <% end %>
+#   </div>
+
+#   <div>
+#     <%= form.label :body %><br>
+#     <%= form.text_area :body %><br>
+#     <% @article.errors.full_messages_for(:title).each do |message| %>
+#       <div><%= message %></div>
+#     <% end %>
+#   </div>
+
+#   <div>
+#     <%= form.submit %>
+#   </div>
+# <% end %>
+
+
+
+__________________________________________________
+
+
+models/concerns/visible.rb
+models/comment.rb
+
+    VALID_STATUSES = ['public', 'private', 'archived']
+
+    validates :status, inclusion: { in: VALID_STATUSES }
+
+    def archived?
+        status == 'archived'
+    end
